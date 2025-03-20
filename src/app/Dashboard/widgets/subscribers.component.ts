@@ -1,0 +1,20 @@
+import { Component, inject } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { DashboardSignalRService } from '../../Services/dashboard-signalr.service';
+
+@Component({
+  selector: 'app-subscribers',
+  imports: [MatIconModule],
+  template: `
+    <div class="d-flex fs-5">
+      <p class="stat mb-0 mx-1">{{ singalRservice.employeeCount() }}</p>
+      <mat-icon class="text-success">arrow_circle_up</mat-icon>
+    </div>
+    <div class="fw-light stat-subtext">
+      <span>+502</span> in the last 24 days
+    </div>
+  `,
+})
+export class SubscribersComponent {
+  singalRservice = inject(DashboardSignalRService);
+}
