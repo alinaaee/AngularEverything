@@ -63,34 +63,49 @@ export class ExcelToPdfConverterComponent {
     if (!this.excelData.length) return;
 
     const pdf = new jsPDF();
-    // Use autoTable to retain table format
+
+    // Extract the dynamic title from the first row (Assuming it's not part of the table header)
+    const title = this.excelData[0][0]; // First column, first row contains title
+    const pageWidth = pdf.internal.pageSize.getWidth(); 
+
+    pdf.setFontSize(12);
+    pdf.setFont("bold");
+    pdf.setTextColor(0, 0, 0);
+    pdf.setFillColor(173, 216, 230);
+    pdf.rect(10, 10, pageWidth - 20, 10, "F"); // Background for title
+    pdf.text(title, pageWidth / 2, 17, { align: "center" });
+
+    // Remove title row from the table before generating PDF
+    const tableHeaders = this.excelData[1]; // The second row should be actual table headers
+    const tableBody = this.excelData.slice(2); // Remaining data after title and headers
+
     autoTable(pdf, {
-      head: [this.excelData[0]], // Headers
-      body: this.excelData.slice(1), // Data rows
-      startY: 20,
-      styles: { 
-        fontSize: 8,
-        cellPadding: 2,
-        fontStyle: 'bold',
-        textColor: [0,0,0],
-      },
-      
-      headStyles: {
-        fillColor: [173, 216, 230], 
-        textColor: [0, 0, 0], 
-        fontStyle: "bold",
-        fontSize: 12,
-        cellWidth: "auto"
-      },
-
-      bodyStyles: {cellWidth: "auto"},
-
-      theme: 'grid'
+        head: [tableHeaders], // Table headers
+        body: tableBody, // Table data
+        startY: 25, // Position below the title
+        styles: { 
+            fontSize: 8,
+            cellPadding: 2,
+            textColor: [0,0,0],
+        },
+        headStyles: {
+            fillColor: [173, 216, 230], 
+            textColor: [0, 0, 0], 
+            fontStyle: "bold",
+            fontSize: 10,
+        },
+        columnStyles: {
+            0: { cellWidth: 15 },  // Fixed width for S.no
+            1: { cellWidth: 'auto' },  // Expandable Enroll No.
+            2: { cellWidth: 'auto' },  // Expandable Membership No.
+            3: { cellWidth: 'auto' },  // Expandable Name
+            4: { cellWidth: 'auto' },  // Expandable Card No.
+        },
+        theme: 'grid'
     });
 
-    // Derive the file name from the uploaded file
     const pdfFileName = this.fileName ? this.fileName.replace(/\.[^/.]+$/, ".pdf") : "converted.pdf";
     pdf.save(pdfFileName);
-    
-  }
+}
+
 }
