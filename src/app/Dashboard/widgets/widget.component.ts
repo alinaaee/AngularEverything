@@ -1,9 +1,9 @@
 import { Component, input, signal } from "@angular/core";
-import { Widget } from "../models/dashboard";
 import {CommonModule, NgComponentOutlet} from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
-import { WidgetOptionsComponent } from "../Dashboard/widgets/widget-options/widget-options.component";
 import { CdkDrag, CdkDragPlaceholder } from "@angular/cdk/drag-drop";
+import { WidgetOptionsComponent } from "./widget-options/widget-options.component";
+import { Widget } from "../../models/dashboard";
 
 @Component({
     selector: "app-widget",

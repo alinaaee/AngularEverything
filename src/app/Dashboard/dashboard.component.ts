@@ -1,15 +1,17 @@
 import { Component, ElementRef, inject, viewChild } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { DashboardService } from "../Services/dashboard.service";
-import { WidgetComponent } from "../components/widget.component";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import {wrapGrid} from "animate-css-grid"
 import {CdkDragDrop, DragDropModule} from '@angular/cdk/drag-drop';
 import { DashboardHeaderComponent } from "./dashboard-header.component";
 import { DashboardSignalRService } from "../Services/dashboard-signalr.service";
+import { WidgetComponent } from "./widgets/widget.component";
 
 @Component({
+    selector: 'app-dashboard',
+    standalone: true,
     imports: [WidgetComponent, MatButtonModule, MatIconModule, MatMenuModule, DragDropModule, DashboardHeaderComponent],
     template: ` 
         <app-dashboard-header></app-dashboard-header>

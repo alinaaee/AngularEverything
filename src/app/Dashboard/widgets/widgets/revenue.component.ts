@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { DashboardSignalRService } from '../../Services/dashboard-signalr.service';
+import { DashboardSignalRService } from '../../../Services/dashboard-signalr.service';
 
 @Component({
   selector: 'app-revenue',

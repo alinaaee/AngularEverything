@@ -12,22 +12,19 @@ import * as XLSX from 'xlsx';
   imports: [MatButtonModule, MatIconModule, CommonModule],
   template: `
         <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
-      <div class="card shadow-lg p-4" style="width: 400px;">
-        <h2 class="text-center text-primary mb-3">Excel to PDF Converter</h2>
-
-        <label for="file-upload" class="btn btn-outline-primary w-100 mb-3">
-          <mat-icon>upload</mat-icon> Upload Excel File
-          <input id="file-upload" type="file" class="d-none" (change)="onFileChange($event)" accept=".xls,.xlsx" />
-        </label>
-
-        <p *ngIf="fileName" class="text-muted text-center">📄 {{ fileName }}</p>
-
-        <button mat-raised-button color="primary" class="w-100 mt-2"
-          (click)="convertToPdf()" [disabled]="!excelData.length">
-          <mat-icon>picture_as_pdf</mat-icon> Convert to PDF
-        </button>
+          <div class="card shadow-lg p-4" style="width: 400px;">
+            <h2 class="text-center text-primary mb-3">Excel to PDF Converter</h2>
+            <label for="file-upload" class="btn btn-outline-primary w-100 mb-3">
+              <mat-icon>upload</mat-icon> Upload Excel File
+              <input id="file-upload" type="file" class="d-none" (change)="onFileChange($event)" accept=".xls,.xlsx" />
+            </label>
+            <p *ngIf="fileName" class="text-muted text-center">📄 {{ fileName }}</p>
+            <button mat-raised-button color="primary" class="w-100 mt-2"
+              (click)="convertToPdf()" [disabled]="!excelData.length">
+              <mat-icon>picture_as_pdf</mat-icon> Convert to PDF
+            </button>
+          </div>
       </div>
-    </div>
   `,
   styles: [`
     

@@ -1,10 +1,10 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { Widget } from '../models/dashboard';
-import { SubscribersComponent } from '../Dashboard/widgets/subscribers.component';
-import { ViewsComponent } from '../Dashboard/widgets/views.component';
-import { WatchTimeComponent } from '../Dashboard/widgets/watch-time.component';
-import { RevenueComponent } from '../Dashboard/widgets/revenue.component';
-import { AnalyticsComponent } from '../Dashboard/widgets/analytics.component';
+import { WatchTimeComponent } from '../Dashboard/widgets/widgets/watch-time.component'
+import { AnalyticsComponent } from '../Dashboard/widgets/widgets/analytics.component';
+import { SubscribersComponent } from '../Dashboard/widgets/widgets/subscribers.component';
+import { ViewsComponent } from '../Dashboard/widgets/widgets/views.component';
+import { RevenueComponent } from '../Dashboard/widgets/widgets/revenue.component';
 
 @Injectable()
 
