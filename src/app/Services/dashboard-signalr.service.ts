@@ -7,15 +7,19 @@ import * as signalR from '@microsoft/signalr';
 export class DashboardSignalRService {
   private hubConnection!: signalR.HubConnection;
 
-  viewsCount = signal<number>(0);
-  contractorCount = signal<number>(0);
-  employeeCount = signal<number>(0);
+  //store the json in a single object 
+  dashboardData = signal({
+    employees: { total: 0, male: 0, female: 0, blacklisted: 0, active: 0 },
+    contractors: { total: 0, male: 0, female: 0, blacklisted: 0, active: 0 },
+    visitors: { total: 0, male: 0, female: 0, blacklisted: 0 },
+    shiftHeadCounts: [],
+  });
 
   constructor() {
   }
 
   public startConnection() {
-    console.log('hulluluuluuuuuululu.....');
+    console.log('areeee ho gaya start');
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${'https://localhost:7155/OryggiXpertAPI/XpertHubApi'}`,{
         skipNegotiation: true,
@@ -45,9 +49,7 @@ export class DashboardSignalRService {
 
     this.hubConnection.on('dashSigR', (data: any) => {
       console.log(data);
-      this.employeeCount.set(data.employeeCount);
-      this.contractorCount.set(data.contractorCount);
-      this.viewsCount.set(data.visitorCount);
+      this.dashboardData.set(data);
     });
   }
 }

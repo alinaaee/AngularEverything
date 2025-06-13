@@ -4,10 +4,11 @@ import { DashboardSignalRService } from '../../../Services/dashboard-signalr.ser
 
 @Component({
   selector: 'app-revenue',
+  standalone: true,
   imports: [MatIconModule],
   template: `
     <div class="d-flex fs-5">
-      <p class="stat mb-0 mx-1">{{signalRservice.contractorCount()}}</p>
+      <p class="stat mb-0 mx-1">{{signalRservice.dashboardData().contractors.total}}</p>
       <mat-icon class="text-success">check_circle</mat-icon>
     </div>
     <div class="fw-light stat-subtext">

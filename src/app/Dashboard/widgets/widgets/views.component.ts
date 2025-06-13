@@ -4,10 +4,11 @@ import { DashboardSignalRService } from '../../../Services/dashboard-signalr.ser
 
 @Component({
   selector: 'app-views',
+  standalone: true,
   imports: [MatIconModule],
   template:`
   <div class="d-flex fs-5">
-    <p class="stat mb-0 mx-1">{{signalRservice.viewsCount()}}</p>
+    <p class="stat mb-0 mx-1">{{signalRservice.dashboardData().visitors.total}}</p>
     <mat-icon class="text-success">visibility</mat-icon>
   </div>
   <div class="fw-light stat-subtext">

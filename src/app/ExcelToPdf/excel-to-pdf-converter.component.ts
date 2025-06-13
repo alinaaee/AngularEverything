@@ -5,11 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { DashboardComponent } from "../Dashboard/widget-groups.component";
 
 @Component({
   selector: 'app-excel-to-pdf',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatButtonModule, MatIconModule, CommonModule, DashboardComponent],
   template: `
         <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
           <div class="card shadow-lg p-4" style="width: 400px;">
@@ -25,6 +26,7 @@ import * as XLSX from 'xlsx';
             </button>
           </div>
       </div>
+      <app-dashboard></app-dashboard>
   `,
   styles: [`
     

@@ -13,6 +13,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-left: 5px solid #000;
 }
 
+.widget-text {
+    font-size: clamp(0.8rem, 2.5vw, 5rem);
+}
+
+
 // $custom-theme: mat.define-theme(
 //     (
 //         color: (

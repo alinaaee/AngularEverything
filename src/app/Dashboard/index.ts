@@ -1,6 +1,6 @@
 // DASHBOARD AND ITS HEADER
-export * from './dashboard.component';
-export * from './dashboard-header.component';
+export * from './widget-groups.component';
+export * from './widget-menu-button.component';
 
 //WIDGETS
 export * from './widgets/widget.component';

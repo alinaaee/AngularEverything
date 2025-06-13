@@ -3,6 +3,7 @@ import Chart, { elements } from 'chart.js/auto';
 
 @Component({
   selector: 'app-analytics',
+  standalone: true,
   imports: [],
   template: `
     <div class="chart-container">

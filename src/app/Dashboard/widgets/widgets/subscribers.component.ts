@@ -4,10 +4,11 @@ import { DashboardSignalRService } from '../../../Services/dashboard-signalr.ser
 
 @Component({
   selector: 'app-subscribers',
+  standalone: true,
   imports: [MatIconModule],
   template: `
     <div class="d-flex fs-5">
-      <p class="stat mb-0 mx-1">{{ singalRservice.employeeCount() }}</p>
+      <p class="stat mb-0 mx-1">{{ singalRservice.dashboardData().employees.total }}</p>
       <mat-icon class="text-success">arrow_circle_up</mat-icon>
     </div>
     <div class="fw-light stat-subtext">
