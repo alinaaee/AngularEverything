@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import { DashboardComponent } from "../Dashboard/widget-groups.component";
+import { FloatingDraggableButtonComponent } from '../shared/floating-draggable-button/floating-draggable-button.component';
 
 @Component({
   selector: 'app-excel-to-pdf',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule, DashboardComponent],
+  imports: [MatButtonModule, MatIconModule, CommonModule, FloatingDraggableButtonComponent],
   template: `
         <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
           <div class="card shadow-lg p-4" style="width: 400px;">
@@ -26,12 +26,11 @@ import { DashboardComponent } from "../Dashboard/widget-groups.component";
             </button>
           </div>
       </div>
-      <app-dashboard></app-dashboard>
+      <app-floating-draggable-button/>
   `,
-  styles: [`
-    
-  `]
+  styles: [``]
 })
+
 export class ExcelToPdfConverterComponent {
   excelData: any[][] = [];
   fileName: string | null = null;
@@ -57,7 +56,6 @@ export class ExcelToPdfConverterComponent {
     reader.readAsArrayBuffer(file);
   }
   
-
   convertToPdf() {
     if (!this.excelData.length) return;
 
@@ -105,6 +103,11 @@ export class ExcelToPdfConverterComponent {
 
     const pdfFileName = this.fileName ? this.fileName.replace(/\.[^/.]+$/, ".pdf") : "converted.pdf";
     pdf.save(pdfFileName);
-}
+  }
+
+  onButtonClick = () => {
+    console.log('Floating button clicked!');
+  };
+
 
 }
