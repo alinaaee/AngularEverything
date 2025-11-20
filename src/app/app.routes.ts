@@ -4,6 +4,7 @@ import { TryHostComponent } from './try-host/try-host.component';
 import { ExcelToPdfConverterComponent } from './ExcelToPdf/excel-to-pdf-converter.component';
 import { TryReusableComponent } from './Examples/user/try-reusable/try-reusable.component';
 import { InfiniteScrollingComponent } from './infinite-scrolling/infinite-scrolling.component';
+import { MapComponent } from './Map/map/map.component';
 
 export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'tryHost', component: TryHostComponent},
     { path: 'reusable', component: TryReusableComponent},
     { path: 'infiniteScroll', component: InfiniteScrollingComponent},
+    { path: 'maps', component: MapComponent},
     { path: '**', redirectTo: '/convert' }
 ];

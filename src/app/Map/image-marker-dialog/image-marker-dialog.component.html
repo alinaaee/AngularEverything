@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '450px'}"
+  (onHide)="onHide()">
+
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">
+      {{ mode === 'upload' ? 'Upload Image for Location' : 'View Location Image' }}
+    </span>
+  </ng-template>
+
+  <div class="dialog-content">
+    <!-- Coordinates Display -->
+    <div class="coordinates-info" *ngIf="coordinates">
+      <p><strong>Latitude:</strong> {{ coordinates.lat.toFixed(6) }}</p>
+      <p><strong>Longitude:</strong> {{ coordinates.lng.toFixed(6) }}</p>
+    </div>
+
+    <!-- Upload Mode -->
+    <div *ngIf="mode === 'upload'" class="upload-section">
+      <div class="file-input-wrapper">
+        <input
+          type="file"
+          accept="image/*"
+          (change)="onNativeFileSelected($event)"
+          class="file-input"
+          id="fileInput"
+          [disabled]="isCompressing">
+        <label for="fileInput" class="file-label" [class.disabled]="isCompressing">
+          <i [class]="isCompressing ? 'pi pi-spin pi-spinner' : 'pi pi-cloud-upload'"></i>
+          <span>{{ isCompressing ? 'Compressing...' : 'Choose Image' }}</span>
+        </label>
+      </div>
+
+      <div *ngIf="selectedImage" class="preview-container">
+        <img [src]="selectedImage" alt="Preview" class="image-preview">
+      </div>
+    </div>
+
+    <!-- View Mode -->
+    <div *ngIf="mode === 'view' && existingImage" class="view-section">
+      <img [src]="existingImage" alt="Location Image" class="image-view">
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer">
+      <p-button
+        *ngIf="mode === 'upload'"
+        label="Cancel"
+        icon="pi pi-times"
+        (onClick)="onHide()"
+        [text]="true"
+        severity="secondary"
+        [disabled]="isCompressing">
+      </p-button>
+
+      <p-button
+        *ngIf="mode === 'upload'"
+        label="Save"
+        icon="pi pi-check"
+        (onClick)="saveImage()"
+        [disabled]="!selectedImage || isCompressing">
+      </p-button>
+
+      <p-button
+        *ngIf="mode === 'view'"
+        label="Delete Marker"
+        icon="pi pi-trash"
+        (onClick)="onDelete()"
+        severity="danger">
+      </p-button>
+
+      <p-button
+        *ngIf="mode === 'view'"
+        label="Close"
+        icon="pi pi-times"
+        (onClick)="onHide()"
+        severity="secondary">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

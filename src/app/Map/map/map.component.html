@@ -1,0 +1,14 @@
+<p-toast position="top-right"></p-toast>
+
+<div class="map-container">
+  <div id="map" class="map"></div>
+
+  <app-image-marker-dialog
+    [(visible)]="dialogVisible"
+    [mode]="dialogMode"
+    [existingImage]="selectedImage"
+    [coordinates]="selectedCoordinates"
+    (imageUploaded)="onImageUploaded($event)"
+    (deleteMarker)="onDeleteMarker()">
+  </app-image-marker-dialog>
+</div>
