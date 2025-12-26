@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>💖 Hello Kitty Coin Grab! 💖</h1>
+  <canvas
+    #gameCanvas
+    id="gameCanvas"
+    width="500"
+    height="400"
+  ></canvas>
+  <button
+    *ngIf="gameOver"
+    (click)="retry()"
+    class="retry-btn"
+  >
+    🔁 Retry
+  </button>
+</div>

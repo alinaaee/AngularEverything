@@ -5,6 +5,7 @@ import { ExcelToPdfConverterComponent } from './ExcelToPdf/excel-to-pdf-converte
 import { TryReusableComponent } from './Examples/user/try-reusable/try-reusable.component';
 import { InfiniteScrollingComponent } from './infinite-scrolling/infinite-scrolling.component';
 import { MapComponent } from './Map/map/map.component';
+import { HelloKittyCoinGrabComponent } from './hello-kitty-coin-grab/hello-kitty-coin-grab.component';
 
 export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
     { path: 'reusable', component: TryReusableComponent},
     { path: 'infiniteScroll', component: InfiniteScrollingComponent},
     { path: 'maps', component: MapComponent},
+    { path: 'coin-grab', component: HelloKittyCoinGrabComponent},
     { path: '**', redirectTo: '/convert' }
 ];
