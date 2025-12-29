@@ -1,0 +1,56 @@
+# This is the name of the workflow.
+# You see this name in the GitHub Actions tab.
+name: Angular CI
+
+# This section defines WHEN the workflow should run.
+on:
+  # Run this workflow when code is pushed
+  push:
+    # Only run if the push is to the 'master' branch
+    branches: ["master"]
+
+  # Also run this workflow when a Pull Request is created or updated
+#   pull_request:
+#     # Only if the PR targets the 'master' branch
+#     branches: ["master"]
+
+# This section defines WHAT work should be done
+jobs:
+  # 'build' is the name of the job (you can name it anything)
+  build:
+
+    # This tells GitHub which operating system to use
+    # GitHub will create a temporary Ubuntu Linux machine
+    runs-on: ubuntu-latest
+
+    # Steps are the individual commands that run inside the job
+    steps:
+
+      # Step 1: Download your repository code into the GitHub machine
+      # Without this step, the machine has no access to your project files
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install Node.js on the GitHub machine
+      # Angular needs Node.js to run
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # This installs Node.js version 20
+          node-version: 10.9.0
+
+          # This enables caching for npm packages
+          # It makes future builds faster
+          cache: npm
+
+      # Step 3: Install project dependencies
+      # This reads package.json and package-lock.json
+      # and installs exactly those versions
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Build the Angular application
+      # This usually runs 'ng build'
+      # If there are errors, the workflow will fail
+      - name: Build Angular
+        run: npm run build
