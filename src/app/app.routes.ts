@@ -15,5 +15,5 @@ export const routes: Routes = [
     { path: 'infiniteScroll', component: InfiniteScrollingComponent},
     { path: 'maps', component: MapComponent},
     { path: 'coin-grab', component: HelloKittyCoinGrabComponent},
-    { path: '**', redirectTo: '/convert' }
+    { path: '**', redirectTo: '/coin-grab' }
 ];

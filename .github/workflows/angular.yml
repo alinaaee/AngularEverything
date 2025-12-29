@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           # This installs Node.js version 20
-          node-version: 10.9.0
+          node-version: 22.12.0
 
           # This enables caching for npm packages
           # It makes future builds faster
@@ -48,6 +48,10 @@ jobs:
       # and installs exactly those versions
       - name: Install dependencies
         run: npm ci
+
+        # Fails the workflow if lint errors are found
+      - name: Run lint
+        run: npm run lint
 
       # Step 4: Build the Angular application
       # This usually runs 'ng build'

@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, viewChild } from "@angular/core";
+import { Component, ElementRef, inject, OnInit, viewChild } from "@angular/core";
 import { DashboardService } from "../Services/dashboard.service";
 import {wrapGrid} from "animate-css-grid"
 import {CdkDragDrop, DragDropModule} from '@angular/cdk/drag-drop';
@@ -28,7 +28,7 @@ import { WidgetComponent } from "./widgets/widget.component";
     `
 })
 
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
     
     store = inject(DashboardService);
     signalRservice = inject(DashboardSignalRService);

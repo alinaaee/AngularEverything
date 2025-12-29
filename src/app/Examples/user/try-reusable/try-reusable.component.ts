@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DashboardSignalRService } from '../../../Services/dashboard-signalr.service';
 import { SubscribersComponent, WidgetComponent } from '../../../Dashboard';
 import { Widget } from '../../../models/dashboard';
@@ -10,7 +10,7 @@ import { DashboardService } from '../../../Services/dashboard.service';
   imports: [ WidgetComponent ],
   templateUrl: './try-reusable.component.html',
 })
-export class TryReusableComponent {
+export class TryReusableComponent implements OnInit {
   signalRservice = inject(DashboardSignalRService);
   dashService = inject(DashboardService);
   

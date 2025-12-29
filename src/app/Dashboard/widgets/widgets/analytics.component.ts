@@ -1,5 +1,5 @@
-import { Component, ElementRef, viewChild } from '@angular/core';
-import Chart, { elements } from 'chart.js/auto';
+import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-analytics',
@@ -17,7 +17,7 @@ import Chart, { elements } from 'chart.js/auto';
     }
   `
 })
-export class AnalyticsComponent {
+export class AnalyticsComponent implements OnInit{
   chart = viewChild.required<ElementRef>('chart'); 
   ngOnInit(){
     new Chart(this.chart().nativeElement,{
