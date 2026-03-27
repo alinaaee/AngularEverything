@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ImageMarkerDialogComponent } from '../image-marker-dialog/image-marker-dialog.component';
 import { MarkerStorageService, MarkerData } from '../marker-storage.service';
@@ -13,21 +13,23 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './map.component.scss'
 })
 export class MapComponent implements OnInit, OnDestroy {
+  // Using any for leaflet due to dynamic import and complex type definitions
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private map: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private L: any;
-  private markers: Map<string, any> = new Map();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private markers = new Map<string, any>();
+
+  private platformId = inject(PLATFORM_ID);
+  private markerStorageService = inject(MarkerStorageService);
+  private messageService = inject(MessageService);
 
   dialogVisible = false;
   dialogMode: 'upload' | 'view' = 'upload';
   selectedCoordinates: { lat: number; lng: number } | null = null;
   selectedImage: string | null = null;
   currentMarkerId: string | null = null;
-
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private markerStorageService: MarkerStorageService,
-    private messageService: MessageService
-  ) {}
 
   ngOnInit(): void {
     // Only initialize map in browser environment
@@ -56,6 +58,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }).addTo(this.map);
 
     // Add click event listener to the map
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.map.on('click', (e: any) => {
       this.onMapClick(e.latlng.lat, e.latlng.lng);
     });

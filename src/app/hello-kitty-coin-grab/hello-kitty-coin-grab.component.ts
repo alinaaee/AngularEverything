@@ -9,13 +9,6 @@ interface Particle {
   speedY: number;
 }
 
-interface GameObject {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
 @Component({
   selector: 'app-hello-kitty-coin-grab',
   templateUrl: './hello-kitty-coin-grab.component.html',

@@ -9,11 +9,11 @@ import { CommonModule } from '@angular/common';
   styles: ``,
   imports: [CommonModule],
   template: `
-     <div *ngIf="auth.user(); else loginTemplate">
+    <div [hidden]="!auth.user()">
       <h2>Welcome, {{ auth.user()?.name }}</h2>
       <button (click)="auth.logout()">Logout</button>
     </div>
-    <ng-template #loginTemplate>
+    <ng-template [hidden]="auth.user()">
       <button (click)="auth.login('JohnDoe')">Login</button>
     </ng-template>
   `,

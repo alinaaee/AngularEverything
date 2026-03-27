@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DashboardService } from './Services/dashboard.service';
-import { ThemesService } from './Services/themes.service';
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],

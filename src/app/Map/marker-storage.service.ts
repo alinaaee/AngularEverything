@@ -19,9 +19,6 @@ export interface SaveResult {
 })
 export class MarkerStorageService {
   private readonly STORAGE_KEY = 'map-markers';
-
-  constructor() {}
-
   saveMarker(marker: Omit<MarkerData, 'id' | 'timestamp'>): SaveResult {
     try {
       const markers = this.getAllMarkers();
@@ -38,8 +35,11 @@ export class MarkerStorageService {
         success: true,
         marker: newMarker
       };
-    } catch (error: any) {
-      if (error.name === 'QuotaExceededError') {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorName = error instanceof Error ? error.name : '';
+
+      if (errorName === 'QuotaExceededError') {
         return {
           success: false,
           error: 'Storage quota exceeded. Try deleting some markers or use smaller images.'
@@ -47,7 +47,7 @@ export class MarkerStorageService {
       }
       return {
         success: false,
-        error: 'Failed to save marker: ' + error.message
+        error: 'Failed to save marker: ' + errorMessage
       };
     }
   }
@@ -73,8 +73,8 @@ export class MarkerStorageService {
 
   getStorageInfo(): { used: number; total: number; available: number } {
     let used = 0;
-    for (let key in localStorage) {
-      if (localStorage.hasOwnProperty(key)) {
+    for (const key in localStorage) {
+      if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
         used += localStorage[key].length + key.length;
       }
     }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -16,7 +16,7 @@ import { ImageCompressionService } from '../image-compression.service';
   styleUrls: ['./image-marker-dialog.component.scss']
 })
 export class ImageMarkerDialogComponent {
-  @Input() visible: boolean = false;
+  @Input() visible = false;
   @Input() mode: 'upload' | 'view' = 'upload';
   @Input() existingImage: string | null = null;
   @Input() coordinates: { lat: number; lng: number } | null = null;
@@ -25,13 +25,11 @@ export class ImageMarkerDialogComponent {
   @Output() imageUploaded = new EventEmitter<string>();
   @Output() deleteMarker = new EventEmitter<void>();
 
-  selectedImage: string | null = null;
-  isCompressing: boolean = false;
+  private imageCompressionService = inject(ImageCompressionService);
+  private messageService = inject(MessageService);
 
-  constructor(
-    private imageCompressionService: ImageCompressionService,
-    private messageService: MessageService
-  ) {}
+  selectedImage: string | null = null;
+  isCompressing = false;
 
   onHide(): void {
     this.visible = false;

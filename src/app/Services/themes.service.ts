@@ -18,7 +18,6 @@ export class ThemesService {
     { id: 'yellow', primary: '#FFB300', displayName: 'yellow'},
     { id: 'red', primary: '#BF360C', displayName: 'red'}
   ]
-  constructor() { }
 
   currentTheme = signal<Theme>(this.themes[0]);//default
   

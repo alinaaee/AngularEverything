@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
         wrapGrid(this.dashboard().nativeElement, { duration: 300 });
     }
 
-    drop(event: CdkDragDrop<string, any>){
+    drop(event: CdkDragDrop<string>){
         const { previousContainer, container} = event;
         this.store.updateWidgetPosition(previousContainer.data, container.data)
     }

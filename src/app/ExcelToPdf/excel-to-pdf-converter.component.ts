@@ -19,7 +19,7 @@ import { FloatingDraggableButtonComponent } from '../shared/floating-draggable-b
               <mat-icon>upload</mat-icon> Upload Excel File
               <input id="file-upload" type="file" class="d-none" (change)="onFileChange($event)" accept=".xls,.xlsx" />
             </label>
-            <p *ngIf="fileName" class="text-muted text-center">📄 {{ fileName }}</p>
+            <p [hidden]="!fileName" class="text-muted text-center">📄 {{ fileName }}</p>
             <button mat-raised-button color="primary" class="w-100 mt-2"
               (click)="convertToPdf()" [disabled]="!excelData.length">
               <mat-icon>picture_as_pdf</mat-icon> Convert to PDF
@@ -32,18 +32,19 @@ import { FloatingDraggableButtonComponent } from '../shared/floating-draggable-b
 })
 
 export class ExcelToPdfConverterComponent {
-  excelData: any[][] = [];
+  excelData: (string | number | boolean)[][] = [];
   fileName: string | null = null;
 
-  onFileChange(event: any) {
-    const file = event.target.files[0];
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
     if (!file) return;
-  
+
     this.fileName = file.name; // Store file name for display
-  
+
     const reader = new FileReader();
-    reader.onload = (e: any) => {
-      const data = new Uint8Array(e.target.result);
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      const data = new Uint8Array(e.target?.result as ArrayBuffer);
       const workbook = XLSX.read(data, { type: 'array' });
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
@@ -62,8 +63,8 @@ export class ExcelToPdfConverterComponent {
     const pdf = new jsPDF();
 
     // Extract the dynamic title from the first row (Assuming it's not part of the table header)
-    const title = this.excelData[0][0]; // First column, first row contains title
-    const pageWidth = pdf.internal.pageSize.getWidth(); 
+    const title = String(this.excelData[0][0]); // First column, first row contains title
+    const pageWidth = pdf.internal.pageSize.getWidth();
 
     pdf.setFontSize(12);
     pdf.setFont("bold");

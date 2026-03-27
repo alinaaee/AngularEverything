@@ -7,7 +7,7 @@
     height="400"
   ></canvas>
   <button
-    *ngIf="gameOver"
+    [hidden]="!gameOver"
     (click)="retry()"
     class="retry-btn"
   >

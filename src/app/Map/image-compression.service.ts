@@ -15,14 +15,14 @@ export class ImageCompressionService {
    */
   async compressImage(
     file: File,
-    maxWidth: number = 800,
-    maxHeight: number = 800,
-    quality: number = 0.7
+    maxWidth = 800,
+    maxHeight = 800,
+    quality = 0.7
   ): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
-      reader.onload = (e: any) => {
+      reader.onload = (e: ProgressEvent<FileReader>) => {
         const img = new Image();
 
         img.onload = () => {
@@ -64,7 +64,7 @@ export class ImageCompressionService {
           reject(new Error('Failed to load image'));
         };
 
-        img.src = e.target.result;
+        img.src = e.target?.result as string;
       };
 
       reader.onerror = () => {

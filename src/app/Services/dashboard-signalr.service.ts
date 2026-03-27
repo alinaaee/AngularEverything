@@ -1,22 +1,26 @@
 import { Injectable, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 
+export interface DashboardData {
+  employees: { total: number; male: number; female: number; blacklisted: number; active: number };
+  contractors: { total: number; male: number; female: number; blacklisted: number; active: number };
+  visitors: { total: number; male: number; female: number; blacklisted: number };
+  shiftHeadCounts: unknown[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardSignalRService {
   private hubConnection!: signalR.HubConnection;
 
-  //store the json in a single object 
-  dashboardData = signal({
+  //store the json in a single object
+  dashboardData = signal<DashboardData>({
     employees: { total: 0, male: 0, female: 0, blacklisted: 0, active: 0 },
     contractors: { total: 0, male: 0, female: 0, blacklisted: 0, active: 0 },
     visitors: { total: 0, male: 0, female: 0, blacklisted: 0 },
     shiftHeadCounts: [],
   });
-
-  constructor() {
-  }
 
   public startConnection() {
     console.log('areeee ho gaya start');
@@ -45,9 +49,9 @@ export class DashboardSignalRService {
       return;
     }
 
-    console.log('listenToEvents')
+    console.log('listenToEvents');
 
-    this.hubConnection.on('dashSigR', (data: any) => {
+    this.hubConnection.on('dashSigR', (data: DashboardData) => {
       console.log(data);
       this.dashboardData.set(data);
     });

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
@@ -8,12 +8,12 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
   template: `
     <div class="p-5">
       <mat-dialog-content>
-        <img src="assets/gifs/helloKitty.gif">
+        <img src="assets/gifs/helloKitty.gif" [alt]="">
       </mat-dialog-content>
     </div>
   `,
   styles: [``]
 })
 export class HelloKittyDialogComponent {
-  constructor(private dialog: MatDialog) {}
+  injectedDialog = inject(MatDialog);
 }
