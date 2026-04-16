@@ -1,16 +1,18 @@
-<div class="container">
-  <h1>💖 Hello Kitty Coin Grab! 💖</h1>
-  <canvas
-    #gameCanvas
-    id="gameCanvas"
-    width="500"
-    height="400"
-  ></canvas>
-  <button
-    [hidden]="!gameOver"
-    (click)="retry()"
-    class="retry-btn"
-  >
-    🔁 Retry
-  </button>
+<div class="game-shell">
+  <div class="game-header">
+    <button class="home-btn" (click)="goHome()">← Home</button>
+    <h1>💖 Hello Kitty Coin Grab! 💖</h1>
+    <button class="mute-btn" (click)="toggleMute()" [title]="muted ? 'Unmute' : 'Mute'">
+      {{ muted ? '🔇' : '🔊' }}
+    </button>
+  </div>
+
+  <canvas #gameCanvas width="600" height="420"></canvas>
+
+  <div class="game-controls" [class.visible]="gameOver">
+    <button class="action-btn retry" (click)="retry()">🔁 Play Again</button>
+    <button class="action-btn home"  (click)="goHome()">🏠 Home</button>
+  </div>
+
+  <p class="hint">↑ / Space: Jump &nbsp;|&nbsp; ← →: Move &nbsp;|&nbsp; Collect ⭐ coins, dodge 💣 bombs!</p>
 </div>

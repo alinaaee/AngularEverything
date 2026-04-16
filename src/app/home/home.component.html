@@ -1,0 +1,53 @@
+<div class="bubblegum-page">
+
+  <!-- Floating background bubbles -->
+  <div class="bubble b1"></div>
+  <div class="bubble b2"></div>
+  <div class="bubble b3"></div>
+  <div class="bubble b4"></div>
+  <div class="bubble b5"></div>
+
+  <!-- Hero header -->
+  <header class="hero">
+    <div class="hero-badge">✨ Angular Everything ✨</div>
+    <h1 class="hero-title">
+      <span class="pop">Pop</span> into something fun!
+    </h1>
+    <p class="hero-subtitle">
+      A bubbly collection of Angular experiments — click any bubble to explore!
+    </p>
+  </header>
+
+  <!-- Feature cards grid -->
+  <main class="cards-grid">
+    <div
+      class="card"
+      *ngFor="let feature of features"
+      [style.--card-color]="feature.color"
+      [style.--accent-color]="feature.accentColor"
+      (click)="navigate(feature.route)"
+      tabindex="0"
+      (keydown.enter)="navigate(feature.route)"
+      [attr.aria-label]="'Navigate to ' + feature.title"
+    >
+      <div class="card-bubble"></div>
+      <div class="card-inner">
+        <span class="card-emoji">{{ feature.emoji }}</span>
+        <h2 class="card-title">{{ feature.title }}</h2>
+        <p class="card-desc">{{ feature.description }}</p>
+        <div class="card-tags">
+          <span class="tag" *ngFor="let tag of feature.tags">{{ tag }}</span>
+        </div>
+        <div class="card-cta">
+          Explore <span class="arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Made with 💖 & Angular 19</span>
+  </footer>
+
+</div>

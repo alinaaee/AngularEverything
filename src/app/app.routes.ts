@@ -6,8 +6,10 @@ import { TryReusableComponent } from './Examples/user/try-reusable/try-reusable.
 import { InfiniteScrollingComponent } from './infinite-scrolling/infinite-scrolling.component';
 import { MapComponent } from './Map/map/map.component';
 import { HelloKittyCoinGrabComponent } from './hello-kitty-coin-grab/hello-kitty-coin-grab.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
+    { path: '', component: HomeComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'convert', component: ExcelToPdfConverterComponent},
     { path: 'tryHost', component: TryHostComponent},
@@ -15,5 +17,5 @@ export const routes: Routes = [
     { path: 'infiniteScroll', component: InfiniteScrollingComponent},
     { path: 'maps', component: MapComponent},
     { path: 'coin-grab', component: HelloKittyCoinGrabComponent},
-    { path: '**', redirectTo: '/coin-grab' }
+    { path: '**', redirectTo: '' }
 ];
